@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [Controller::class, 'index']);
+
+Route::get('/{year}/{day}/{env}', [Controller::class, 'solve'])
+    ->whereNumber(['year', 'day'])
+    ->where('env', 'input|example')
+    ->name('solve');
