@@ -26,7 +26,14 @@ class RunCommand extends Command
             return;
         }
 
-        $this->info("Silver: {$instance->silver($data)}");
-        $this->info("Gold: {$instance->gold($data)}");
+        $time = microtime(true);
+        $silver = $instance->silver($data);
+        $time = microtime(true) - $time;
+        $this->info(sprintf('Silver (%.3fms): %s', $time * 1000, $silver));
+
+        $time = microtime(true);
+        $gold = $instance->gold($data);
+        $time = microtime(true) - $time;
+        $this->info(sprintf('Gold (%.3fms): %s', $time * 1000, $gold));
     }
 }
