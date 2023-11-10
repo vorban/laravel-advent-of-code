@@ -46,7 +46,7 @@ echo "Enjoy!"
 
 ```sh
 sail artisan aoc:prepare {year} {day}
-sail artisan aoc:run {year} {day} {env}
+sail artisan aoc:run {year} {day} {--example}
 sail artisan aoc:update-badges
 ```
 
