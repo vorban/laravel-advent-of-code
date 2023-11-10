@@ -1,5 +1,8 @@
-![Laravel](https://img.shields.io/badge/laravel-%23FF2D20.svg?style=for-the-badge&logo=laravel&logoColor=white)
-![Total Stars: 0](https://img.shields.io/badge/total_stars%20⭐-0-gold?style=for-the-badge)
+<div>
+    <img alt="Laravel" src="https://img.shields.io/badge/laravel-%23FF2D20.svg?style=for-the-badge&logo=laravel&logoColor=white">
+    <img alt="Total Stars: 0" src="https://img.shields.io/badge/total_stars%20⭐-0-gold?style=for-the-badge">
+</div>
+<br />
 
 <div>
     <img src="https://img.shields.io/badge/2015%20⭐-0-gold">
@@ -16,10 +19,11 @@
 </div>
 <br />
 
-# advent-of-code
-Advent of Code solutions.
+# laravel-advent-of-code
+Advent of Code template repository.
 
-**This repository is currently in preparation for the Advent of Code 2023.**
+**This repository is currently in preparation for the Advent of Code 2023
+and not yet ready for use.**
 
 Released under the MIT License.
 See <a href="./LICENSE">./LICENSE</a>.
@@ -40,11 +44,13 @@ echo "Enjoy!"
 
 ## Usage
 
-Install [elf](https://github.com/vorban/elf) with `npm i -g @vorban/elf`.
-
 ```sh
-# create a new day
-elf prepare <year> <day>
+sail artisan aoc:prepare {year} {day}
+sail artisan aoc:run {year} {day} {env}
+sail artisan aoc:update-badges
 ```
 
-Then go to `adventofcode.test/<year>/<day>/<example|input>` or run `sail artisan solve <year> <day>`.
+You can also go to `http://adventofcode.test/{year}/{day}` for a detailed view
+of the input and example data, and the silver and gold results with timings, and the ability to rerun the code.
+
+The homepage `http://adventofcode.test` contains links to all prepared days.
