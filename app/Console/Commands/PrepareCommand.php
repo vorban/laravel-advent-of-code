@@ -49,6 +49,7 @@ class PrepareCommand extends Command
             ],
         ])->getBody()->getContents();
 
+        $this->info("Creating input file [$filename]...");
         file_put_contents($filename, $content);
     }
 
@@ -103,6 +104,7 @@ class PrepareCommand extends Command
         }
         $content = $code->item(0)->textContent;
 
+        $this->info("Creating example file [$filename]...");
         file_put_contents($filename, $content);
     }
 
@@ -119,6 +121,7 @@ class PrepareCommand extends Command
         $stub = str_replace('{{ $year }}', $this->argument('year'), $stub);
         $stub = str_replace('{{ $day }}', sprintf('%02d', $this->argument('day')), $stub);
 
+        $this->info("Creating solution file [$filename]...");
         file_put_contents($filename, $stub);
     }
 
@@ -133,6 +136,7 @@ class PrepareCommand extends Command
             }
         }
 
+        $this->info('Updating .env file...');
         file_put_contents('.env', implode(PHP_EOL, $env));
     }
 }

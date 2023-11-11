@@ -36,7 +36,7 @@ cd advent-of-code
 docker run --rm --interactive --tty --volume $PWD:/app composer install
 
 sail up -d
-echo "Enjoy!"
+echo Enjoy!
 ```
 
 ## Usage
