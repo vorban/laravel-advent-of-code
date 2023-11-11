@@ -23,9 +23,6 @@
 
 Advent of Code template repository.
 
-**This repository is currently in preparation for the Advent of Code 2023
-and not yet ready for use.**
-
 Released under the MIT License.
 See <a href="./LICENSE">./LICENSE</a>.
 
@@ -39,19 +36,18 @@ cd advent-of-code
 docker run --rm --interactive --tty --volume $PWD:/app composer install
 
 sail up -d
-sail npm run build
 echo "Enjoy!"
 ```
 
 ## Usage
 
 ```sh
+# generate code file and download input
 sail artisan aoc:prepare {year} {day}
+
+# hopefully first try !
 sail artisan aoc:run {year} {day} {--example}
+
+# once you're done for the day
 sail artisan aoc:update-badges
 ```
-
-You can also go to `http://adventofcode.test/{year}/{day}` for a detailed view
-of the input and example data, and the silver and gold results with timings, and the ability to rerun the code.
-
-The homepage `http://adventofcode.test` contains links to all prepared days.
