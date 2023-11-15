@@ -13,8 +13,15 @@ class PrepareCommand extends Command
 
     protected $description = 'Prepare the input file and the example file';
 
+    protected int $year;
+
+    protected int $day;
+
     public function handle()
     {
+        $this->year = intval($this->argument('year'));
+        $this->day = intval($this->argument('day'));
+
         if (config('services.adventofcode.session_cookie') === '') {
             $sessionCookie = $this->secret('Please copy paste your session cookie');
             $this->updateEnvFile($sessionCookie);
@@ -28,7 +35,7 @@ class PrepareCommand extends Command
 
     private function handleInputFile()
     {
-        $filename = sprintf('resources/inputs/%s-%s.txt', $this->argument('year'), sprintf('%02d', $this->argument('day')));
+        $filename = sprintf('resources/inputs/%d-%s.txt', $this->year, sprintf('%02d', $this->day));
         if (file_exists($filename)) {
             $this->info('Input file already exists, skipping...');
 
@@ -36,12 +43,7 @@ class PrepareCommand extends Command
         }
 
         $client = new Client();
-        $url = sprintf(
-            '%s/%s/day/%s/input',
-            config('services.adventofcode.base_uri'),
-            $this->argument('year'),
-            $this->argument('day')
-        );
+        $url = sprintf('https://adventofcode.com/%d/day/%d/input', $this->year, $this->day);
 
         $content = $client->get($url, [
             'headers' => [
@@ -55,7 +57,7 @@ class PrepareCommand extends Command
 
     private function handleExample()
     {
-        $filename = sprintf('resources/inputs/%s-%s.example', $this->argument('year'), sprintf('%02d', $this->argument('day')));
+        $filename = sprintf('resources/inputs/%s-%s.example', $this->year, sprintf('%02d', $this->day));
 
         if (file_exists($filename)) {
             $this->info('Example file already exists, skipping...');
@@ -64,12 +66,7 @@ class PrepareCommand extends Command
         }
 
         $client = new Client();
-        $url = sprintf(
-            '%s/%s/day/%s',
-            config('services.adventofcode.base_uri'),
-            $this->argument('year'),
-            $this->argument('day')
-        );
+        $url = sprintf('https://adventofcode.com/%s/day/%s', $this->year, $this->day);
 
         $data = $client->get($url, [
             'headers' => [
@@ -110,7 +107,7 @@ class PrepareCommand extends Command
 
     private function handleStub()
     {
-        $filename = sprintf('app/Solutions/Solution%s%s.php', $this->argument('year'), sprintf('%02d', $this->argument('day')));
+        $filename = sprintf('app/Solutions/Solution%s%s.php', $this->year, sprintf('%02d', $this->day));
         if (file_exists($filename)) {
             $this->info('Solution file already exists, skipping...');
 
@@ -118,8 +115,8 @@ class PrepareCommand extends Command
         }
 
         $stub = file_get_contents('app/Solutions/Solution.stub');
-        $stub = str_replace('{{ $year }}', $this->argument('year'), $stub);
-        $stub = str_replace('{{ $day }}', sprintf('%02d', $this->argument('day')), $stub);
+        $stub = str_replace('{{ $year }}', $this->year, $stub);
+        $stub = str_replace('{{ $day }}', sprintf('%02d', $this->day), $stub);
 
         $this->info("Creating solution file [$filename]...");
         file_put_contents($filename, $stub);
