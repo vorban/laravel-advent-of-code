@@ -26,28 +26,46 @@ Advent of Code template repository.
 Released under the MIT License.
 See <a href="./LICENSE">./LICENSE</a>.
 
-Copyright :copyright: 2023 Valentin Orban
+Copyright :copyright: 2023 {{ $your_name }}
 
 ## Installation
 
+First, click on "use this template" and generate a new repo based on this one.
+
 ```sh
-git clone git@github.com:vorban/advent-of-code.git
+git clone git@github.com:{{ $your_username }}/{{ $your_repo_name}}.git
 cd advent-of-code
+
+cp .env.example .env
+```
+
+### Using docker ?
+
+```sh
 docker run --rm --interactive --tty --volume $PWD:/app composer install
 
-sail up -d
+vendor/bin/sail up -d
+echo Enjoy!
+```
+
+### Got a local dev environment ?
+
+```sh
+composer install
 echo Enjoy!
 ```
 
 ## Usage
 
+Use `sail or `php` depending on wether you want to use docker or not.
+
 ```sh
 # generate code file and download input
-sail artisan aoc:prepare {year} {day}
+vendor/bin/sail artisan aoc:prepare {year} {day}
 
 # hopefully first try !
-sail artisan aoc:run {year} {day} {--example}
+vendor/bin/sail artisan aoc:run {year} {day} {--example}
 
 # once you're done for the day
-sail artisan aoc:update-badges
+vendor/bin/sail artisan aoc:update-badges
 ```
