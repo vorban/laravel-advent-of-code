@@ -33,7 +33,7 @@ Copyright :copyright: 2023 {{ $your_name }}
 First, click on "use this template" and generate a new repo based on this one.
 
 ```sh
-git clone git@github.com:{{ $your_username }}/{{ $your_repo_name}}.git
+git clone git@github.com:{{ $your_username }}/{{ $your_repo_name }}.git
 cd advent-of-code
 
 cp .env.example .env
@@ -57,7 +57,7 @@ echo Enjoy!
 
 ## Usage
 
-Use `sail or `php` depending on wether you want to use docker or not.
+Use `sail` or `php` depending on wether you want to use docker or not.
 
 ```sh
 # generate code file and download input
