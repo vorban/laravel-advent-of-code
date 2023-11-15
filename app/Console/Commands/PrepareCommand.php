@@ -35,7 +35,7 @@ class PrepareCommand extends Command
 
     private function handleInputFile()
     {
-        $filename = sprintf('resources/inputs/%d-%s.txt', $this->year, sprintf('%02d', $this->day));
+        $filename = sprintf('resources/inputs/%d/%s.txt', $this->year, sprintf('%02d', $this->day));
         if (file_exists($filename)) {
             $this->info('Input file already exists, skipping...');
 
@@ -52,12 +52,12 @@ class PrepareCommand extends Command
         ])->getBody()->getContents();
 
         $this->info("Creating input file [$filename]...");
-        file_put_contents($filename, $content);
+        file_force_contents($filename, $content);
     }
 
     private function handleExample()
     {
-        $filename = sprintf('resources/inputs/%s-%s.example', $this->year, sprintf('%02d', $this->day));
+        $filename = sprintf('resources/inputs/%s/%s.example', $this->year, sprintf('%02d', $this->day));
 
         if (file_exists($filename)) {
             $this->info('Example file already exists, skipping...');
@@ -102,12 +102,12 @@ class PrepareCommand extends Command
         $content = $code->item(0)->textContent;
 
         $this->info("Creating example file [$filename]...");
-        file_put_contents($filename, $content);
+        file_force_contents($filename, $content);
     }
 
     private function handleStub()
     {
-        $filename = sprintf('app/Solutions/Solution%s%s.php', $this->year, sprintf('%02d', $this->day));
+        $filename = sprintf('app/Solutions/Year_%s/Solution_%s.php', $this->year, sprintf('%02d', $this->day));
         if (file_exists($filename)) {
             $this->info('Solution file already exists, skipping...');
 
@@ -119,7 +119,7 @@ class PrepareCommand extends Command
         $stub = str_replace('{{ $day }}', sprintf('%02d', $this->day), $stub);
 
         $this->info("Creating solution file [$filename]...");
-        file_put_contents($filename, $stub);
+        file_force_contents($filename, $stub);
     }
 
     private function updateEnvFile(string $session)
