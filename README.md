@@ -23,21 +23,61 @@
 
 Advent of Code template repository.
 
+**This is not made to be hosted.** This is made to boostrap
+your yearly Advent of Code solving routine as a Laravel dev,
+by removing the hassle of preparing a php environment with
+appropriate helpers.
+
 Released under the MIT License.
-See <a href="./LICENSE">./LICENSE</a>.
+See [LICENSE](./LICENSE).
 
 Copyright :copyright: 2023 {{ $your_name }}
+
+## AoC compliance and usage of this template
+
+This repository does follow the [automation guidelines](https://www.reddit.com/r/adventofcode/wiki/faqs/automation) on the [/r/adventofcode](https://www.reddit.com/r/adventofcode/) community wiki. Specifically:
+
+- No automation is provided
+- Outbound calls to the /events endpoint are cached for 24h (see `app/Console/UpdateBadgesCommand.php`)
+- Once inputs are downloaded, they are cached locally indefinitly (see `app/Console/PrepareCommand`)
+- If you suspect your input is corrupted, you can run the command again to regenerate from cache. Manual deletion of cache files is required to enable a fresh download.
+
+The User-Agent header is set to information you need to provide in your `.env`.
+It must be set to the owner of the end-repository (**not the template repository owner**).
+
+This template repository is provided as-is,
+as detailed in the [LICENSE](./LICENSE) file.
+
+By using this template repository, you become the
+one and only maintainer of your new repository.
+
+By using this template repository, you take responsability
+over your usage of the provided scripts. The original author
+designed them to be executed 25 times a year, no more.
+
+Although a Laravel application, this code is not fit
+to be hosted. Specifically, the code as-is is not fit
+for any kind of automation or production environments.
 
 ## Installation
 
 First, click on "use this template" and generate a new repo based on this one.
 
 ```sh
-git clone git@github.com:{{ $your_username }}/{{ $your_repo_name }}.git
+git clone git@github.com:{{ $your_name }}/{{ $your_repo_name }}.git
 cd advent-of-code
 
 cp .env.example .env
 ```
+
+**Specify in the .env the values for**:
+- your GitHub username
+- your GitHub email
+- the name of your repository
+
+These are **required** by the AoC maintainers to track
+abusive use of the website.
+Without those values, the scripts **will** get banned.
 
 ### Using docker ?
 
@@ -61,11 +101,11 @@ Use `sail` or `php` depending on wether you want to use docker or not.
 
 ```sh
 # generate code file and download input
-vendor/bin/sail artisan aoc:prepare {year} {day}
+sail artisan aoc:prepare {year} {day}
 
 # hopefully first try !
-vendor/bin/sail artisan aoc:run {year} {day} {--example}
+sail artisan aoc:run {year} {day} {--example}
 
 # once you're done for the day
-vendor/bin/sail artisan aoc:update-badges
+sail artisan aoc:update-badges
 ```
